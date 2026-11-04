@@ -2,95 +2,287 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="How Trails, an Android expense tracker, handles your SMS messages and expenses.">
 <title>Trails Privacy Policy</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='18 18 72 72'%3E%3Crect x='18' y='18' width='72' height='72' rx='17' fill='%230F6B5C'/%3E%3Cg fill='none' stroke-linecap='round' stroke='%23C6EBDF' stroke-width='5.4'%3E%3Cpath d='M27 57 41 50'/%3E%3Cpath d='M33 65 44 60' opacity='.7'/%3E%3Cpath d='M43 72 51 68' opacity='.5'/%3E%3C/g%3E%3Ccircle cx='65' cy='49' r='17' fill='%23fff'/%3E%3C/svg%3E">
+<!-- No web fonts, cookies or trackers: this page makes no requests beyond loading itself. Its one inline script only highlights the navbar. -->
 <style>
-:root { color-scheme: light dark; --bg:#F1F4F2; --surface:#FFFFFF; --fg:#10231D; --muted:#4F6660; --line:#DCE3DF; --mark:#FFE3A8; --on-mark:#4A2C00; }
-@media (prefers-color-scheme: dark) { :root { --bg:#0C1613; --surface:#13211D; --fg:#E3F1EC; --muted:#94ADA6; --line:#233832; --mark:#3F2E05; --on-mark:#FFE3A8; } }
-body { margin:0; background:var(--bg); color:var(--fg); font:400 16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
-main { max-width:680px; margin:0 auto; padding:32px 16px 64px; }
-h1 { font-size:32px; line-height:1.15; margin:0 0 8px; }
-h2 { font-size:20px; line-height:1.3; margin:32px 0 8px; }
-p, ul { margin:0 0 12px; } li { margin-bottom:6px; }
-.meta { color:var(--muted); font-size:14px; }
-.tablewrap { overflow-x:auto; }
-table { border-collapse:collapse; width:100%; background:var(--surface); font-size:15px; }
-th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
-.ph { background:var(--mark); color:var(--on-mark); padding:0 4px; border-radius:4px; }
+:root {
+  color-scheme: light dark;
+  --bg:#F1F4F2; --surface:#FFFFFF; --soft:#E6ECE9; --fg:#10231D; --muted:#4F6660; --line:#DCE3DF;
+  --primary:#0F6B5C; --tile:#C6EBDF; --on-tile:#053A31; --hero:#0A5144; --on-hero:#FFFFFF; --on-hero-muted:#C6EBDF;
+  --mark:#FFE3A8; --on-mark:#4A2C00; --nav:rgba(255,255,255,.94);
+  --sans:"Plus Jakarta Sans","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --gutter:max(16px,env(safe-area-inset-left,0px));
+  --gutter-r:max(16px,env(safe-area-inset-right,0px));
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg:#0C1613; --surface:#13211D; --soft:#1A2C27; --fg:#E3F1EC; --muted:#94ADA6; --line:#233832;
+  --primary:#6FDCC4; --tile:#134A40; --on-tile:#BDF3E6; --hero:#134A40; --on-hero:#E3F1EC; --on-hero-muted:#BDF3E6;
+  --mark:#3F2E05; --on-mark:#FFE3A8; --nav:rgba(19,33,29,.94);
+} }
+* { box-sizing:border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:var(--bg); color:var(--fg); font:400 16px/1.65 var(--sans); }
+h1,h2,p,ul { margin:0; }
+a { color:var(--primary); text-underline-offset:2px; }
+:focus-visible { outline:2px solid var(--primary); outline-offset:2px; border-radius:6px; }
+.icon { display:block; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+.sprite { display:none; }
+.wrap { width:100%; max-width:820px; margin:0 auto; padding-left:var(--gutter); padding-right:var(--gutter-r); }
+
+.skip { position:absolute; left:-999px; top:8px; z-index:30; background:var(--surface); color:var(--fg); padding:8px 12px; border-radius:8px; }
+.skip:focus { left:16px; }
+
+.nav { position:sticky; top:0; z-index:20; background:var(--nav); border-bottom:1px solid var(--line); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); padding-top:env(safe-area-inset-top,0px); }
+.nav .bar { display:flex; align-items:center; gap:8px 20px; max-width:1120px; margin:0 auto; padding:10px var(--gutter-r) 10px var(--gutter); }
+.brand { display:flex; align-items:center; gap:10px; flex:none; color:var(--fg); text-decoration:none; font-weight:700; letter-spacing:-.02em; font-size:18px; }
+.brand svg { border-radius:9px; }
+.links { display:flex; gap:2px; list-style:none; padding:0; margin:0 0 0 auto; min-width:0; }
+.links a { display:flex; align-items:center; gap:6px; padding:7px 9px; border-radius:9px; color:var(--muted); font-size:14px; font-weight:600; text-decoration:none; white-space:nowrap; }
+.links a:hover { background:var(--soft); color:var(--fg); }
+.links a[aria-current="location"] { background:var(--tile); color:var(--on-tile); }
+@media (max-width:960px) {
+  .nav .bar { flex-wrap:wrap; }
+  .links { order:2; flex:0 0 calc(100% + var(--gutter) + var(--gutter-r)); margin:0 calc(-1 * var(--gutter-r)) -4px calc(-1 * var(--gutter)); padding:0 var(--gutter-r) 4px var(--gutter); overflow-x:auto; scrollbar-width:none; }
+  .links::-webkit-scrollbar { display:none; }
+}
+
+.hero { background:var(--hero); color:var(--on-hero); padding-block:clamp(36px,7vw,64px); }
+.hero .wrap { display:grid; gap:14px; }
+.eyebrow { display:flex; align-items:center; gap:8px; color:var(--on-hero-muted); font-size:14px; font-weight:600; }
+h1 { font-size:clamp(32px,6.5vw,48px); line-height:1.08; letter-spacing:-.035em; font-weight:700; text-wrap:balance; }
+.lead { max-width:62ch; font-size:17px; color:var(--on-hero-muted); }
+.meta { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:6px; font-size:14px; list-style:none; padding:0; }
+.meta li { display:flex; align-items:center; gap:7px; min-width:0; overflow-wrap:anywhere; }
+.meta a { color:inherit; }
+
+.content { display:grid; gap:44px; padding-block:40px 64px; }
+section { display:grid; gap:12px; min-width:0; scroll-margin-top:124px; }
+@media (min-width:961px) { section { scroll-margin-top:84px; } }
+h2 { display:flex; align-items:center; gap:12px; font-size:clamp(20px,3.6vw,24px); line-height:1.25; letter-spacing:-.02em; font-weight:700; }
+.tile { display:grid; place-items:center; width:38px; height:38px; flex:none; border-radius:11px; background:var(--tile); color:var(--on-tile); }
+ul.plain { padding-left:20px; display:grid; gap:6px; }
+ul.plain li::marker { color:var(--primary); }
+
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr)); gap:12px; list-style:none; padding:0; }
+.cards li { display:grid; gap:10px; align-content:start; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; }
+.cards .tile { width:34px; height:34px; border-radius:10px; }
+
+.notes { display:grid; gap:12px; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px; }
+.tablewrap { overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:16px; }
+table { border-collapse:collapse; width:100%; font-size:15px; }
+th,td { padding:12px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+tbody tr:last-child td { border-bottom:0; }
+th { font-size:13px; font-weight:600; color:var(--muted); }
+td:first-child { font-weight:600; white-space:nowrap; }
+@media (max-width:480px) { td:first-child { white-space:normal; width:34%; } th,td { padding:11px 12px; } }
+
+.contact { background:var(--soft); border-radius:16px; padding:18px; }
+footer { border-top:1px solid var(--line); background:var(--surface); color:var(--muted); font-size:14px; padding-block:20px; }
+footer .wrap { display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 20px; }
+@media (prefers-reduced-motion:no-preference) { html { scroll-behavior:smooth; } .links a { transition:background-color .15s,color .15s; } }
+@media print { .nav,.skip { display:none; } .hero { background:none; color:#000; padding-block:0 16px; } .lead,.eyebrow { color:#000; } }
 </style>
 </head>
 <body>
-<main>
-<h1>Trails Privacy Policy</h1>
-<p class="meta">Effective date: <span class="ph">[EFFECTIVE DATE]</span><br>Developer: <span class="ph">[LEGAL NAME]</span><br>Contact: <span class="ph">[CONTACT EMAIL]</span></p>
+<a class="skip" href="#summary">Skip to the policy</a>
 
-<p>Trails is an Android expense tracker. It reads bank debit alerts in your SMS messages and turns them into expenses on your phone. This policy explains what Trails reads, what it saves and what it does with that information.</p>
+<nav class="nav" aria-label="Privacy policy sections">
+  <div class="bar">
+    <a class="brand" href="#top" aria-label="Trails Privacy Policy, back to top">
+      <svg width="34" height="34" viewBox="18 18 72 72" aria-hidden="true"><rect x="18" y="18" width="72" height="72" fill="#0F6B5C"/><g transform="translate(54 54) scale(.9) translate(-54 -54)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M24 57 40 49" stroke="#C6EBDF" stroke-opacity=".9" stroke-width="6"/><path d="M31 66.5 43 60.5" stroke="#C6EBDF" stroke-opacity=".7" stroke-width="6"/><path d="M42 74.5 51 70" stroke="#C6EBDF" stroke-opacity=".5" stroke-width="6"/><circle cx="66" cy="49" r="19" fill="#FFFFFF"/><path d="M60 39H72M60 44.5H72M61.5 39C68.5 39 68.5 50 61.5 50H60L70 59" stroke="#9A5B00" stroke-width="3.2"/></g></svg>
+      Trails
+    </a>
+    <ul class="links">
+      <li><a href="#summary"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg>Summary</a></li>
+      <li><a href="#sms"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sms"/></svg>SMS</a></li>
+      <li><a href="#saved"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg>Saved data</a></li>
+      <li><a href="#permissions"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg>Permissions</a></li>
+      <li><a href="#sharing"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-share"/></svg>Sharing</a></li>
+      <li><a href="#deleting"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-trash"/></svg>Deleting</a></li>
+      <li><a href="#contact"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-<h2>The short version</h2>
-<ul>
-<li>Your SMS and expenses stay on your phone. Trails does not send them to the developer or to anyone else.</li>
-<li>Trails has no account, sign-in, ads or analytics.</li>
-<li>Your data leaves your phone only if you export or back it up to a location you choose.</li>
-</ul>
+<main id="top">
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.4 7 10 4-1.6 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 8-8M16 7l3 3"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 13v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-6"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5M14 11v5"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></symbol>
+  <symbol id="i-child" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/></symbol>
+  <symbol id="i-update" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.5-3.5L4 9M4 4v5h5M4 13a8 8 0 0 0 14.5 3.5L20 15M20 20v-5h-5"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-noads" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></symbol>
+</svg>
 
-<h2>SMS messages Trails reads</h2>
-<p>If you allow it, Trails checks incoming SMS messages on your phone to find bank debit alerts. If you run Scan SMS, it also reads your SMS inbox for the dates you choose, to find debits it missed.</p>
-<p>Messages that don't look like debit alerts, such as personal messages and one-time passwords, are ignored and are not saved.</p>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg>Your SMS and expenses stay on your phone</p>
+    <h1>Trails Privacy Policy</h1>
+    <p class="lead">Trails is an Android expense tracker. It reads bank debit alerts in your SMS messages and turns them into expenses on your phone. This policy explains what Trails reads, what it saves and what it does with that information.</p>
+    <ul class="meta">
+      <li><svg class="icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-calendar"/></svg>Effective date: 6 November 2026</li>
+      <li><svg class="icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-person"/></svg>Developer: Utilio Apps</li>
+      <li><svg class="icon" width="17" height="17" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Contact: <a href="mailto:utilio.apps@gmail.com">utilio.apps@gmail.com</a></li>
+    </ul>
+  </div>
+</header>
 
-<h2>Information saved on your phone</h2>
-<p>For each debit alert, Trails saves the details needed to show the expense:</p>
-<ul>
-<li>Amount, date and time, merchant or UPI ID, and category</li>
-<li>Bank name, SMS sender ID, payment type and reference number</li>
-<li>A masked account number showing only the last digits</li>
-</ul>
-<p><strong>Full SMS text:</strong> if "Ask before saving every debit" is on, Trails keeps the text of the message only while the expense waits for your review. The text is deleted when you save or ignore that expense. If the setting is off, the text is not saved.</p>
-<p><strong>Ignored items:</strong> Trails keeps the details of an expense you ignore, without the SMS text, so a later scan doesn't add it again.</p>
-<p><strong>Other information:</strong> Trails also saves expenses and notes you enter, the categories and rules it learns from your edits, your senders list, and your settings, such as your budget and theme.</p>
+<div class="wrap content">
+  <section id="summary">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span>The short version</h2>
+    <ul class="cards">
+      <li><span class="tile"><svg class="icon" width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></span>Your SMS and expenses stay on your phone. Trails does not send them to the developer or to anyone else.</li>
+      <li><span class="tile"><svg class="icon" width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-noads"/></svg></span>Trails has no account, sign-in, ads or analytics.</li>
+      <li><span class="tile"><svg class="icon" width="19" height="19" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-share"/></svg></span>Your data leaves your phone only if you export or back it up to a location you choose.</li>
+    </ul>
+  </section>
 
-<h2>Permissions</h2>
-<div class="tablewrap"><table>
-<thead><tr><th>Permission</th><th>Why Trails asks</th></tr></thead>
-<tbody>
-<tr><td>Receive SMS</td><td>To detect bank debit alerts as they arrive.</td></tr>
-<tr><td>Read SMS</td><td>To scan your inbox, only when you use Scan SMS.</td></tr>
-<tr><td>Notifications</td><td>To ask you to review a new debit. A notification can show the amount and merchant, including on your lock screen, depending on your phone's settings.</td></tr>
-</tbody>
-</table></div>
-<p>You can turn off capture in Trails or remove these permissions in your phone's settings at any time. You can still add expenses by hand.</p>
+  <section id="sms">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sms"/></svg></span>SMS messages Trails reads</h2>
+    <p>If you allow it, Trails checks incoming SMS messages on your phone to find bank debit alerts. If you run Scan SMS, it also reads your SMS inbox for the dates you choose, to find debits it missed.</p>
+    <p>Messages that don't look like debit alerts, such as personal messages and one-time passwords, are ignored and are not saved.</p>
+  </section>
 
-<h2>Sharing</h2>
-<p>Trails does not sell or share your information. The app does not have internet permission and does not upload your SMS or expenses.</p>
-<p>You control two ways of moving data off the app:</p>
-<ul>
-<li><strong>CSV export:</strong> creates an unencrypted file of your expenses. It does not include SMS text.</li>
-<li><strong>Entire app backup:</strong> creates a file encrypted with a passphrase you choose. It does not include SMS text or items waiting for review. The passphrase can't be recovered if you lose it.</li>
-</ul>
-<p>These files are saved where you choose. If you choose a cloud service or share a file, that service's or recipient's own practices apply. Android's automatic app backup is turned off for Trails.</p>
+  <section id="saved">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></span>Information saved on your phone</h2>
+    <p>For each debit alert, Trails saves the details needed to show the expense:</p>
+    <ul class="plain">
+      <li>Amount, date and time, merchant or UPI ID, and category</li>
+      <li>Bank name, SMS sender ID, payment type and reference number</li>
+      <li>A masked account number showing only the last digits</li>
+    </ul>
+    <div class="notes">
+      <p><strong>Full SMS text:</strong> if "Ask before saving every debit" is on, Trails keeps the text of the message only while the expense waits for your review. The text is deleted when you save or ignore that expense. If the setting is off, the text is not saved.</p>
+      <p><strong>Ignored items:</strong> Trails keeps the details of an expense you ignore, without the SMS text, so a later scan doesn't add it again.</p>
+      <p><strong>Other information:</strong> Trails also saves expenses and notes you enter, the categories and rules it learns from your edits, your senders list, and your settings, such as your budget and theme.</p>
+    </div>
+  </section>
 
-<h2>Google Play</h2>
-<p>If you install Trails from Google Play, Google handles the download and may collect information under its own terms, as described in the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. Google may also give the developer summary statistics, such as install numbers and crash reports. Trails does not send your SMS or expenses to Google.</p>
+  <section id="permissions">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg></span>Permissions</h2>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Permission</th><th>Why Trails asks</th></tr></thead>
+      <tbody>
+        <tr><td>Receive SMS</td><td>To detect bank debit alerts as they arrive.</td></tr>
+        <tr><td>Read SMS</td><td>To scan your inbox, only when you use Scan SMS.</td></tr>
+        <tr><td>Notifications</td><td>To ask you to review a new debit. A notification can show the amount and merchant, including on your lock screen, depending on your phone's settings.</td></tr>
+      </tbody>
+    </table></div>
+    <p>You can turn off capture in Trails or remove these permissions in your phone's settings at any time. You can still add expenses by hand.</p>
+  </section>
 
-<h2>Keeping and deleting your information</h2>
-<p>Your information stays on your phone until you delete it. The developer has no copy, so the developer can't view, change or delete it for you.</p>
-<ul>
-<li><strong>Delete an expense:</strong> open it in Trails and delete it.</li>
-<li><strong>Delete everything:</strong> go to Settings, then Reset &amp; delete all data. Your theme and the record that you finished setup and the tour are kept.</li>
-<li><strong>Remove the app:</strong> uninstalling Trails deletes its data from your phone.</li>
-</ul>
-<p>Files you exported or backed up are not deleted by these steps. Delete them separately.</p>
+  <section id="sharing">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-share"/></svg></span>Sharing</h2>
+    <p>Trails does not sell or share your information. The app does not have internet permission and does not upload your SMS or expenses.</p>
+    <p>You control two ways of moving data off the app:</p>
+    <ul class="plain">
+      <li><strong>CSV export:</strong> creates an unencrypted file of your expenses. It does not include SMS text.</li>
+      <li><strong>Entire app backup:</strong> creates a file encrypted with a passphrase you choose. It does not include SMS text or items waiting for review. The passphrase can't be recovered if you lose it.</li>
+    </ul>
+    <p>These files are saved where you choose. If you choose a cloud service or share a file, that service's or recipient's own practices apply. Android's automatic app backup is turned off for Trails.</p>
+  </section>
 
-<h2>Security</h2>
-<p>Trails keeps your information in its private storage on your phone. Anyone who can unlock and use your phone may be able to open the app, so use a screen lock. No method of storage is completely secure.</p>
+  <section id="google-play">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg></span>Google Play</h2>
+    <p>If you install Trails from Google Play, Google handles the download and may collect information under its own terms, as described in the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. Google may also give the developer summary statistics, such as install numbers and crash reports. Trails does not send your SMS or expenses to Google.</p>
+  </section>
 
-<h2>Children</h2>
-<p>Trails is meant for adults managing their own finances. It is not directed at children.</p>
+  <section id="deleting">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-trash"/></svg></span>Keeping and deleting your information</h2>
+    <p>Your information stays on your phone until you delete it. The developer has no copy, so the developer can't view, change or delete it for you.</p>
+    <ul class="plain">
+      <li><strong>Delete an expense:</strong> open it in Trails and delete it.</li>
+      <li><strong>Delete everything:</strong> go to Settings, then Reset &amp; delete all data. Your theme and the record that you finished setup and the tour are kept.</li>
+      <li><strong>Remove the app:</strong> uninstalling Trails deletes its data from your phone.</li>
+    </ul>
+    <p>Files you exported or backed up are not deleted by these steps. Delete them separately.</p>
+  </section>
 
-<h2>Changes to this policy</h2>
-<p>If Trails changes how it handles information, this page and its effective date will be updated. If a new feature uses internet access or accepts payments, this policy will be updated to describe it before that feature is released.</p>
+  <section id="security">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg></span>Security</h2>
+    <p>Trails keeps your information in its private storage on your phone. Anyone who can unlock and use your phone may be able to open the app, so use a screen lock. No method of storage is completely secure.</p>
+  </section>
 
-<h2>Contact</h2>
-<p>Questions about this policy can be sent to <span class="ph">[CONTACT EMAIL]</span>.</p>
+  <section id="children">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-child"/></svg></span>Children</h2>
+    <p>Trails is meant for adults managing their own finances. It is not directed at children.</p>
+  </section>
+
+  <section id="changes">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-update"/></svg></span>Changes to this policy</h2>
+    <p>If Trails changes how it handles information, this page and its effective date will be updated. If a new feature uses internet access or accepts payments, this policy will be updated to describe it before that feature is released.</p>
+  </section>
+
+  <section id="contact">
+    <h2><span class="tile"><svg class="icon" width="21" height="21" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg></span>Contact</h2>
+    <p class="contact">Questions about this policy can be sent to <a href="mailto:utilio.apps@gmail.com">utilio.apps@gmail.com</a>.</p>
+  </section>
+</div>
 </main>
+
+<footer>
+  <div class="wrap">
+    <span>Trails Privacy Policy</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+<script>
+// Highlights the navbar link for the section being read. Sections without a link keep the previous one highlighted.
+(function () {
+  var nav = document.querySelector('.nav');
+  var list = document.querySelector('.links');
+  var links = Array.prototype.slice.call(list.querySelectorAll('a'));
+  var sections = links.map(function (link) { return document.querySelector(link.getAttribute('href')); });
+  var current = null;
+  var queued = false;
+
+  function activeLink() {
+    var root = document.documentElement;
+    if (window.scrollY > 0 && window.scrollY + window.innerHeight >= root.scrollHeight - 2) return links[links.length - 1];
+    var line = nav.offsetHeight + 32;
+    var active = null;
+    sections.forEach(function (section, i) {
+      if (section.getBoundingClientRect().top <= line) active = links[i];
+    });
+    return active;
+  }
+
+  function update() {
+    queued = false;
+    var next = activeLink();
+    if (next === current) return;
+    if (current) current.removeAttribute('aria-current');
+    if (next) {
+      next.setAttribute('aria-current', 'location');
+      // On narrow screens, keep the highlighted tab visible without moving the page.
+      if (list.scrollWidth > list.clientWidth) {
+        list.scrollLeft = next.parentElement.offsetLeft - list.offsetLeft - (list.clientWidth - next.offsetWidth) / 2;
+      }
+    }
+    current = next;
+  }
+
+  function queue() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  update();
+})();
+</script>
 </body>
 </html>
