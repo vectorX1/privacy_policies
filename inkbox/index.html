@@ -260,7 +260,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
     <li><span class="chip good"><svg class="i"><use href="#i-phone"/></svg></span><strong>Processed on your phone</strong>Sorting, verification code detection, spam filtering, search and the dashboard run on the device.</li>
     <li><span class="chip"><svg class="i"><use href="#i-server"/></svg></span><strong>No server of ours</strong>We do not run a server that receives your data, and we cannot see your messages.</li>
     <li><span class="chip"><svg class="i"><use href="#i-eyeoff"/></svg></span><strong>No ads, no analytics</strong>Your data is not sold, and it is not used for advertising or profiling.</li>
-    <li><span class="chip warm"><svg class="i"><use href="#i-cloud"/></svg></span><strong>Backups are your choice</strong>A backup goes to your own Google Drive or a folder you pick, only after you set it up.</li>
+    <li><span class="chip warm"><svg class="i"><use href="#i-cloud"/></svg></span><strong>Backups are your choice</strong>A backup goes to your own Google Drive or a file you save, only when you set it up or ask for it.</li>
   </ul>
 
   <section class="flow" aria-labelledby="flow-title">
@@ -275,7 +275,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
       <div class="arrow" aria-hidden="true"></div>
       <ul class="routes">
         <li><span class="chip"><svg class="i"><use href="#i-send"/></svg></span><span><strong>Your mobile carrier</strong>Messages you send.</span></li>
-        <li><span class="chip warm"><svg class="i"><use href="#i-cloud"/></svg></span><span><strong>Your Google Drive or folder</strong>Backups, only if you set them up.</span></li>
+        <li><span class="chip warm"><svg class="i"><use href="#i-cloud"/></svg></span><span><strong>Your Google Drive or a file</strong>Backups, only if you set them up or save one.</span></li>
         <li><span class="chip warm"><svg class="i"><use href="#i-share"/></svg></span><span><strong>Whoever you choose</strong>A diagnostics report or an email, only if you send it.</span></li>
         <li class="never"><span class="chip good"><svg class="i"><use href="#i-server"/></svg></span><span><strong>Our servers, advertisers, analytics</strong>Nothing. We run no server that receives your data.</span></li>
       </ul>
@@ -333,7 +333,6 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
               <tr><th scope="row">Contacts (optional)</th><td>To show names and photos and to pick recipients.</td></tr>
               <tr><th scope="row">Notifications</th><td>To tell you about new messages, failed sends and backup problems.</td></tr>
               <tr><th scope="row">Run at startup</th><td>To restore scheduled messages and background tasks after a restart.</td></tr>
-              <tr><th scope="row">Biometric</th><td>To confirm backup actions if you turn that on. Android performs the check; Inkbox never receives your fingerprint or face data.</td></tr>
               <tr><th scope="row">Internet and network state</th><td>Google Drive sign-in and backups.</td></tr>
               <tr><th scope="row">Wake lock and foreground service</th><td>Added by Android libraries to finish background work such as importing and backing up.</td></tr>
             </tbody>
@@ -360,7 +359,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
         <div class="head"><span class="chip warm"><svg class="i"><use href="#i-send"/></svg></span><h2>What can leave your phone</h2></div>
         <ul class="dots">
           <li><strong>Messages you send</strong> go through your mobile carrier, as with any SMS app. Your carrier's terms and charges apply.</li>
-          <li><strong>Backups</strong> are sent to Google Drive or written to a folder you choose, only if you set this up. If the folder you pick is synced by another service, that service receives the file.</li>
+          <li><strong>Backups</strong> are sent to Google Drive if you set this up, or saved to a file where you choose when you ask. If the place you pick is synced by another service, that service receives the file.</li>
           <li><strong>A diagnostics report</strong> leaves your phone only if you export it and share it yourself.</li>
           <li><strong>Email to us</strong>: if you write to us, we receive your email address and what you send, and use it to reply.</li>
         </ul>
@@ -385,9 +384,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
         <ul class="dots">
           <li>Connections to Google use HTTPS.</li>
           <li>Google Drive backups are always encrypted with AES-256-GCM. The key is a random key that Inkbox keeps in the same private Drive folder, so a phone signed in to the same Google account can restore without a passphrase. Anyone who gets access to that Google account could also use the key.</li>
-          <li>Backups to a folder on your phone are encrypted by default with a key derived from your passphrase (Argon2id) and AES-256-GCM. We cannot recover a forgotten passphrase. Without it, such a backup cannot be restored.</li>
-          <li>If you turn encryption off for backups on your phone, anyone who can open the backup file can read your messages.</li>
-          <li>Screenshots and screen recording of the app's screens are blocked.</li>
+          <li>Backup files you save yourself are encrypted by default with a key derived from your passphrase (Argon2id) and AES-256-GCM. You can turn this off for a file; anyone who gets that file can then read it. We cannot recover a forgotten passphrase. Without it, such a backup cannot be restored.</li>
+          <li>Screenshots and screen recording of the app's screens are blocked unless you turn this off in Settings, under Data and privacy.</li>
         </ul>
         <p>Notifications can show message content. You can control what appears on your lock screen in Android settings.</p>
       </section>
@@ -400,7 +398,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
           <li><strong>Cases</strong>: delete a case to remove its notes, checklist and links. Its messages stay.</li>
           <li><strong>App data</strong>: Settings, Privacy, <em>Delete app data</em> removes Inkbox's cases, categories, rules, search index and other data. SMS messages stay on the phone, messages in Trash show again, and numbers on the Android block list stay blocked.</li>
           <li><strong>Uninstalling</strong> removes the app's private data. It does not remove SMS messages or backup files.</li>
-          <li><strong>Local backups</strong>: delete the files from the folder you chose.</li>
+          <li><strong>Backup files</strong>: delete them from where you saved them.</li>
           <li><strong>Google Drive backups</strong>: turning Drive off in Inkbox stops new backups but keeps the existing file. To delete it, open Google Drive on the web, go to Settings, then Manage apps, and delete Inkbox's hidden app data.</li>
         </ul>
         <p>Inkbox has no user accounts of its own. Email you send us is kept only as long as needed to handle your request, and you can ask us to delete it.</p>
