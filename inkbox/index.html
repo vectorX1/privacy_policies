@@ -235,7 +235,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
       <div>
         <p class="eyebrow">Effective 01 December 2026</p>
         <h1>Privacy Policy.<br><span>Your messages stay yours.</span></h1>
-        <p class="lead">Inkbox is an SMS app that sorts your messages on your phone. This page explains what the app reads, what it stores, what can leave your phone and how you can remove it.</p>
+        <p class="lead">Inkbox is an SMS app that sorts your messages on your phone and lets you group them into cases. This page explains what the app reads, what it stores, what can leave your phone and how you can remove it.</p>
       </div>
       <svg class="art" viewBox="0 0 380 340" aria-hidden="true" font-family="system-ui, sans-serif">
         <circle cx="190" cy="170" r="150" fill="#fff" opacity=".06"/>
@@ -270,7 +270,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
       <div class="phone">
         <h3><svg class="i"><use href="#i-phone"/></svg>Stays on your phone</h3>
         <p>Inkbox does its work here.</p>
-        <ul class="tags"><li>Sorting</li><li>Code detection</li><li>Spam filter</li><li>Search</li><li>Dashboard</li></ul>
+        <ul class="tags"><li>Sorting</li><li>Code detection</li><li>Spam filter</li><li>Search</li><li>Dashboard</li><li>Cases</li></ul>
       </div>
       <div class="arrow" aria-hidden="true"></div>
       <ul class="routes">
@@ -349,6 +349,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
           <li>Categories, folders, sender rules, blocked numbers and your corrections.</li>
           <li>Transaction details read from bank and payment messages, such as amount, merchant and reference, for the dashboard.</li>
           <li>Drafts, scheduled messages, templates and your settings.</li>
+          <li>Cases you create, with their descriptions, notes, checklists and links to messages.</li>
           <li>A diagnostics log of technical events without message content, verification codes, full phone numbers or passwords.</li>
         </ul>
         <p>Numbers you block may also be added to the Android system block list.</p>
@@ -363,7 +364,7 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
           <li><strong>A diagnostics report</strong> leaves your phone only if you export it and share it yourself.</li>
           <li><strong>Email to us</strong>: if you write to us, we receive your email address and what you send, and use it to reply.</li>
         </ul>
-        <p>A backup contains your messages, categories, rules, blocked numbers, drafts, scheduled messages, templates and settings.</p>
+        <p>A backup contains your messages, categories, rules, blocked numbers, drafts, scheduled messages, templates, cases and settings.</p>
         <p>Android's own cloud backup and device-to-device transfer are switched off for Inkbox's data.</p>
       </section>
 
@@ -383,9 +384,9 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
         <div class="head"><span class="chip good"><svg class="i"><use href="#i-shield"/></svg></span><h2>Security</h2></div>
         <ul class="dots">
           <li>Connections to Google use HTTPS.</li>
-          <li>Backup encryption is on by default. Encrypted backups are protected with a key derived from your passphrase (Argon2id) and encrypted with AES-256-GCM.</li>
-          <li>We cannot recover a forgotten passphrase. Without it, an encrypted backup cannot be restored.</li>
-          <li>If you turn encryption off, anyone who can open the backup file can read your messages.</li>
+          <li>Google Drive backups are always encrypted with AES-256-GCM. The key is a random key that Inkbox keeps in the same private Drive folder, so a phone signed in to the same Google account can restore without a passphrase. Anyone who gets access to that Google account could also use the key.</li>
+          <li>Backups to a folder on your phone are encrypted by default with a key derived from your passphrase (Argon2id) and AES-256-GCM. We cannot recover a forgotten passphrase. Without it, such a backup cannot be restored.</li>
+          <li>If you turn encryption off for backups on your phone, anyone who can open the backup file can read your messages.</li>
           <li>Screenshots and screen recording of the app's screens are blocked.</li>
         </ul>
         <p>Notifications can show message content. You can control what appears on your lock screen in Android settings.</p>
@@ -396,7 +397,8 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
         <p>Data stays until you delete it. Messages in Trash, including expired verification codes moved there, remain until you permanently delete them or empty the Trash.</p>
         <ul class="dots">
           <li><strong>Messages</strong>: delete them in Inkbox, then delete them permanently from Trash.</li>
-          <li><strong>App data</strong>: Settings, Privacy, <em>Delete app data</em> removes Inkbox's categories, rules, search index and other data. SMS messages stay on the phone, messages in Trash show again, and numbers on the Android block list stay blocked.</li>
+          <li><strong>Cases</strong>: delete a case to remove its notes, checklist and links. Its messages stay.</li>
+          <li><strong>App data</strong>: Settings, Privacy, <em>Delete app data</em> removes Inkbox's cases, categories, rules, search index and other data. SMS messages stay on the phone, messages in Trash show again, and numbers on the Android block list stay blocked.</li>
           <li><strong>Uninstalling</strong> removes the app's private data. It does not remove SMS messages or backup files.</li>
           <li><strong>Local backups</strong>: delete the files from the folder you chose.</li>
           <li><strong>Google Drive backups</strong>: turning Drive off in Inkbox stops new backups but keeps the existing file. To delete it, open Google Drive on the web, go to Settings, then Manage apps, and delete Inkbox's hidden app data.</li>
@@ -479,4 +481,3 @@ footer .wrap { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space
 </script>
 </body>
 </html>
-
